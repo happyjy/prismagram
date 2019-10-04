@@ -5,12 +5,8 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 import { GraphQLServer } from "graphql-yoga";
 import logger from "morgan";
 import schema from "./schema.js";
-import { sendSecretMail } from "./utils";
-
-sendSecretMail("okwoyjy@gmail.com", '123');
 
 const PORT = process.env.PORT || 4000;
-
 /* 
 //schema.js파일을 만들어 아래는 주석처리
 // const typeDefs = `
