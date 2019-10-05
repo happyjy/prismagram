@@ -5,6 +5,7 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 import { adjectives, nouns } from "./words"
 import nodeMailer from "nodemailer";
 import sgTransport from "nodemailer-sendgrid-transport";
+import jwt from "jsonwebtoken"
 
 export const generateSecret = () => {
   const randomNumber = Math.floor(Math.random() * adjectives.length);
@@ -31,3 +32,9 @@ export const sendSecretMail = (address, secret) => {
   }
   return sendMail(email)
 }
+
+/**
+ * jwt.sign이 JWT_SECRET 단어를 가지고 암호화
+ * @param {*} id 
+ */
+export const generateToken = id => jwt.sign({ id }, process.env.JWT_SECRET);

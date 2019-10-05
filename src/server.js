@@ -4,7 +4,9 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 import { GraphQLServer } from "graphql-yoga";
 import logger from "morgan";
-import schema from "./schema.js";
+import passport from "passport";
+import schema from "./schema";
+import "./passport";
 
 const PORT = process.env.PORT || 4000;
 /* 
@@ -29,6 +31,7 @@ const server = new GraphQLServer({schema});
 //morgan (logger middleware 추가)
 //GraphQLServer에는 express server가 내장되어 있음.
 server.express.use(logger("dev"));
+server.express.use(passport.authenticate("jwt"));
 
 //start function 추가
 server.start({ port: PORT }, () => 
