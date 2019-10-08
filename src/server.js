@@ -4,7 +4,7 @@ import logger from "morgan";
 import schema from "./schema";
 import "./passport";
 import { authenticateJwt } from "./passport";
-
+import { isAuthenticated } from "./middlewares";
 const PORT = process.env.PORT || 4000;
 /* 
 //schema.js파일을 만들어 아래는 주석처리
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 4000;
 //서버생성
 const server = new GraphQLServer({
   schema,
-  context: ({ request }) => ({ request })
+  context: ({ request }) => ({ request, isAuthenticated })
 });
 
 //morgan (logger middleware 추가)
