@@ -1,12 +1,21 @@
+type Query {
+  me: UserProfile!
+}
 
-## orm 처럼 retrive 할때 
-type ProfileResponse {
+type UserProfile {
   user: User!
   posts: [Post!]!
 }
-type Query {
-  me: ProfileResponse!
-}
+
+
+## orm 처럼 retrive 할때 
+# type ProfileResponse {
+#   user: User!
+#   posts: [Post!]!
+# }
+# type Query {
+#   me: ProfileResponse!
+# }
 
 ## framgment를 사용할 때 
 # type Query {
