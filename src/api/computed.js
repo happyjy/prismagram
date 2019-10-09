@@ -1,0 +1,46 @@
+import { prisma } from "../../generated/prisma-client";
+
+export default {
+  //prisma가 먼저 datamodel.prisma 에서 schema를 검색하며 필드를 찾느데 없다면 
+  //이곳으로 와서 query를 lookup 할 것이다.
+  User: {
+    fullName: parent => {
+      console.log("### fullName", parent);
+      return `${parent.firstName} ${parent.lastName}`;
+    },
+    // fullName: (parent, __, { request }) => {
+    //   console.log("### parent: ", parent);
+    //   return "lalalal";
+    // }
+    
+    //UserProfile을 요청한 사람이 팔로잉 했는가를 확인
+    //* parent: UserProfile를 선택한 유저
+    //* request: 로그인한 유저
+    amIFollowing: async (parent, _, { request }) => {
+      const { user } = request;
+      const { id: parentId } = parent;
+      try {
+        const exits = prisma.$exists.user({
+          AND: [
+            { id: parentId }, 
+            { follwers_some: [user.id] }
+          ]
+        });
+        console.log(exits);
+        if ( exits ) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
+    itsMe: (parent, _, { request }) => {
+      const { user } = request;
+      const { id: parentId } = parent;
+      return user.id === parentId;
+    }
+  }
+};
