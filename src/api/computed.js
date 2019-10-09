@@ -16,28 +16,28 @@ export default {
     //UserProfile을 요청한 사람이 팔로잉 했는가를 확인
     //* parent: UserProfile를 선택한 유저
     //* request: 로그인한 유저
-    amIFollowing: async (parent, _, { request }) => {
+    isFollowing: async (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
       try {
-        const exits = prisma.$exists.user({
+        return prisma.$exists.user({
           AND: [
-            { id: parentId }, 
-            { follwers_some: [user.id] }
+            {
+              id: user.id
+            },
+            {
+              following_some: {
+                id: parentId
+              }
+            }
           ]
         });
-        console.log(exits);
-        if ( exits ) {
-          return true;
-        } else {
-          return false;
-        }
       } catch (error) {
         console.log(error);
         return false;
       }
     },
-    itsMe: (parent, _, { request }) => {
+    isSelf: (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
       return user.id === parentId;
