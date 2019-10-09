@@ -2,12 +2,6 @@ type Query {
   me: UserProfile!
 }
 
-type UserProfile {
-  user: User!
-  posts: [Post!]!
-}
-
-
 ## orm 처럼 retrive 할때 
 # type ProfileResponse {
 #   user: User!
