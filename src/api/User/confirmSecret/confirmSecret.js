@@ -7,6 +7,9 @@ export default {
       const { email, secret } = args;
       const user = await prisma.user({ email });
       if (user.loginSecret === secret) {
+        // console.log("### generateToken(user.id): ", generateToken(user.id))
+        // new Error();
+
         //로그인후 User.loginSecret 초기화
         await prisma.updateUser({
           where: { id: user.id },
@@ -14,6 +17,7 @@ export default {
             loginSecret: ""
           }
         });
+
         //JWT
         return generateToken(user.id);
       } else {
