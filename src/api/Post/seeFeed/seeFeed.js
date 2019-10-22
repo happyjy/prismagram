@@ -10,13 +10,14 @@ export default {
 
       //1.
       const following = await prisma.user({ id: user.id }).following();
-      return prisma.post({
-        where:{
-          user:{
-            id_id: [...following.map(user => user.id), user.id]
+      return prisma.posts({
+        where: {
+          user: {
+            id_in: [...following.map(user => user.id), user.id]
           }
         },
         orderBy: 'createdAt_DESC'
+        // orderBy: 'id_DESC'
       });
     }
   }
