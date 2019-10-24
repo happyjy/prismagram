@@ -48,8 +48,13 @@ export default {
         }
       });
       
-       //room을 찾고 message를 거기에 넣는다. 
-       //만약 room이 없다면 participants구성원으로 rooms을 만들고 message를 보낸다.
+      // 1. toId유무로 누구에게 보낼건지 판단
+      //   1. toId가 있다면 그 사람에게 보내야한다.
+      //   2. toId가 없다면 채팅방에 속해있는 인원에게 보내야한다. 
+      //   여기서 ROOM_FRAGMENT를 만들어 줌
+      // 2. filter조건, filter return에 [0]
+      // 인스타 그램 dm은 1:1 채팅이기 때문에 getTo보면 filter로 participant가 내가 아닌 것을 조건으로 걸었다.
+      // 그럼 결과적으로 두명 채팅방에서 내가 빠지면 상대방이 남아 첫번째 요소를 가지고 오는 [0] 값을 붙였다.
     }
   }
 }
