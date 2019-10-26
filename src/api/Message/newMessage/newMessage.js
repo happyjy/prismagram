@@ -14,7 +14,9 @@ export default {
               }
             }
           ]
-        });
+        })
+        .node()
+        // .previousValues();
       },
       resolve: payload => payload
     }
