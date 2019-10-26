@@ -22,7 +22,7 @@ export default {
         room = await prisma.room({ id: roomId }).$fragment(ROOM_FRAGMENT);
       }
 
-      console.log(room)
+      // console.log(room)
       const getTo = room.participants.filter(
         participant => participant.id !== user.id
       )[0];
