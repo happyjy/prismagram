@@ -12,7 +12,7 @@ export const COMMENT_FRAGMENT = `
   }
 `;
 
-export const FILE_FRGMENT = `
+export const FILE_FRAGMENT = `
   id
   url
 `;
@@ -30,7 +30,7 @@ export const FULL_POST_FRAGMENT = `
 //     location
 //     caption
 //     files {
-//       ${FILE_FRGMENT}
+//       ${FILE_FRAGMENT}
 //     }
 //     comments {
 //       ${COMMENT_FRAGMENT}
