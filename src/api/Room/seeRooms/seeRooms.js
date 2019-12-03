@@ -6,13 +6,14 @@ export default {
     seeRooms: async(_, __, { request, isAuthenticated }) => {
       isAuthenticated(request);
       const { user } = request;
-      return prisma.rooms({
+      return prisma
+        .rooms({
         where: {
           participants_some: {
             id: user.id
           }
         }
-      }).$fragment(ROOM_FRAGMENT);
+      });
     }
   }
 };

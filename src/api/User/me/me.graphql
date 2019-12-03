@@ -1,5 +1,5 @@
 type Query {
-  me: UserProfile!
+  me: User!
 }
 
 ## orm 처럼 retrive 할때 

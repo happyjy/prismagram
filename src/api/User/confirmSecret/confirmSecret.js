@@ -6,6 +6,8 @@ export default {
     confirmSecret: async (_, args) => {
       const { email, secret } = args;
       const user = await prisma.user({ email });
+      console.log("### check loginSecret, seceret: ",user, secret )
+      console.log("### user.loginSecret === secret: ",user.loginSecret === secret)
       if (user.loginSecret === secret) {
         // console.log("### generateToken(user.id): ", generateToken(user.id))
         // new Error();
@@ -18,7 +20,7 @@ export default {
           }
         });
 
-        //JWT
+        //generate Token(JWT)
         return generateToken(user.id);
       } else {
         throw Error("Wrong email/secret conviation");
