@@ -26,12 +26,18 @@ export default {
       });
     },
     likeCount: (parent) => {
-      return prisma
-        .likesConnection({
-          where: { post: { id: parent.id }}
+      return prisma.likesConnection({
+          where: { post: { id: parent.id } }
         })
         .aggregate()
         .count() || 0
+    },
+    commentCount: parent => {
+      return prisma.commentsConnection({
+        where: { post: { id: parent.id } }
+      })
+      .aggregate()
+      .count()
     }
   }
 };

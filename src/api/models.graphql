@@ -31,7 +31,8 @@ type Post {
   likes: [Like!]!
   comments: [Comment!]!
   isLiked: Boolean!
-  likeCount: Int
+  likeCount: Int!
+  commentCount: Int!
   createdAt: String 
   updatedAt: String
 }
