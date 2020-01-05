@@ -15,7 +15,8 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Query: {
     seeUser: async(_, args) => {
-      const { id } = args;
+      console.log("### seeUser.js > arguments: ", arguments);
+      const { username } = args;
       // const user = await prisma.user({ id });
       // const posts = await prisma.user({ id }).posts();
       // console.log("###seeUser", {id, user, posts})
@@ -24,7 +25,7 @@ export default {
       //   user, 
       //   posts
       // };
-      return prisma.user({ id });
+      return prisma.user({ username });
     }
   }
 };

@@ -10,6 +10,16 @@ export default {
     likes: ({ id }) => prisma.user({ id }).likes(),
     comments: ({ id }) => prisma.user({ id }).comments(),
     rooms: ({ id }) => prisma.user({ id }).rooms(),
+
+
+    postsCount: ({ id }) => {
+      console.log("### User.js > postsCount > arguments: ", arguments);
+      return prisma
+        .postsConnection({ where: {user: { id } } })
+        .aggregate()
+        .count()
+    },
+
     followingCount: ({ id }) =>
       prisma
         .usersConnection({ where: { followers_some: { id } } })
@@ -22,7 +32,7 @@ export default {
         .count(),
 
     fullName: parent => {
-      console.log("### fullName", parent);
+      console.log("### User.js > fullName > param: ", parent);
       return `${parent.firstName} ${parent.lastName}`;
     },
     // fullName: (parent, __, { request }) => {
@@ -36,7 +46,7 @@ export default {
     isFollowing: async (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
-      console.log("### isFollowing: ", { user, parent })
+      console.log("### User.js > isFollowing: ", { user, parent })
       try {
         return prisma.$exists.user({
           AND: [
